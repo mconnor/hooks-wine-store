@@ -1,0 +1,21 @@
+
+.app {
+    margin: 0 auto 0 auto;
+    width: 50%;
+  
+  }
+  .wineListContainer{
+      display: flex;
+  }
+    
+  
+  
+  @media only screen 
+    and (max-device-width: 736px) { 
+      .app {
+        width: 100%;
+      }
+  
+  }
+  
+  

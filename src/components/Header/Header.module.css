@@ -1,0 +1,6 @@
+
+
+.headline {
+    composes: titleFont from '../../type.module.css';
+    color: red;
+  }

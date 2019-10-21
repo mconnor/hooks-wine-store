@@ -1,0 +1,68 @@
+
+:root {
+    --col-height: 106px;
+}
+
+
+.grayColor {
+  color:darkgray;
+}
+.rowHeight {
+    height: 104px;
+}
+.itemHeight {
+  height: 104px;
+}
+.cardBody {
+  width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  
+    background-color:  rgba(253, 252, 252, 0.5);
+  }
+
+.border-bottom {
+  border-bottom: 1px gray solid;
+}
+.cardBgColor {
+  background-color:  rgba(253, 252, 252, 0.5)
+}
+
+.headline {
+  composes: titleFont from '../../type.module.css';
+  font-size: 1em;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.myBadge {
+  
+}
+
+.subheadline {
+    composes: grayColor;
+    font-size: .8em;
+}
+
+.col1 {
+  height: var(--col-height);
+  width: var(--col-height);
+  flex-basis: auto;
+  background: url(../../images/wine-glass256.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.col2 {
+  flex-grow: 5;
+  flex-basis: auto;
+  padding-left: 20px;
+}
+
+
+.unitSold {
+  margin-left: 1rem;
+}
+
+
