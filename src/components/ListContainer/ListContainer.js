@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState, useEffect } from "react";
+import * as React from "react";
 import Wine from "../Wine/Wine";
 
 type WineProp = {
@@ -21,22 +21,13 @@ type WinesArrayProps = {
 };
 
 function ListContainer(props: WinesArrayProps) {
-  const [mostSold, setMostSold] = useState();
-  const [sortedByYearWines, setSortedByYearWines] = useState();
+    console.log('LISTCONTAINER')
+
+  const [mostSold, setMostSold] = React.useState();
 
   const { wines, onLearnMore } = { ...props };
-  //setSortedByYearWines(wines.sort((a,b) => a.vintage - b.vintage));
-
-  //const [sortedWines, setSortedWines] = useState([]);
-
  
-
-//   useEffect(() => {
-//     setSortedWines(wines.sort((a,b) => a.vintage - b.vintage));
-//   }, []);
-
-
-  const getAverage = (arr: Array) => {
+  const getAverage = (arr: Array<{'stars': number}>) => {
     const len = arr.length;
     if (len === 0) {
       return -1;
@@ -45,15 +36,27 @@ function ListContainer(props: WinesArrayProps) {
     const total = arr
       .map(wine => wine.stars)
       .reduce((totalStars, curr) => totalStars + curr, initialValue);
-    return total / len;
+    const avg =total / len;
+      //console.log('avg', avg)
+    return avg;
   };
 
-  const findMostUnitsSold = (arr: Array) => {
+  const findMostUnitsSold = (arr: Array<WineProp>) => {
+    console.log('findMostUnitsSold of ', arr)
     const maxCallback = (acc, cur) => Math.max(acc, cur);
+    console.log(maxCallback)
+    //returns a number ... 370
     return arr.map(wine => wine.unitsSold).reduce(maxCallback);
+
   };
 
-  //   setMostSold(findMostUnitsSold(wines));
+  //
+//   setMostSold(findMostUnitsSold(wines));
+
+  React.useEffect(() => {
+    setMostSold(findMostUnitsSold(wines))
+  }, [wines])
+
 
   return (
     <section>

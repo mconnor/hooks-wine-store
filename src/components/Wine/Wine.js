@@ -35,6 +35,9 @@ const Wine = (props: Props)  => {
                         
                         </div>
                         <p className={styles.subheadline}>{region}, {vineyard} - {type}</p>
+                        { highSeller ? 
+               <div className={styles.myBadge}><Badge variant="secondary" >High Seller</Badge></div>
+              : null }
                         <div className={styles.rating}>
                             {(averageRating !== -1) ? 
                                 <Ratings

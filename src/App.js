@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState, useEffect } from "react";
+import * as React from "react";
 
 import Header from "./components/Header/Header";
 import Background from "./components/Background/Background";
@@ -9,10 +9,11 @@ import Selector from "./components/Selector/Selector";
 import styles from "./App.module.css";
 
 function App() {
-  const [allWines, setAllWines] = useState([]);
-  const [wineBySelectedVintageArray, setVintageWines] = useState([]);
+  const [allWines, setAllWines] = React.useState([]);
+  const [wineBySelectedVintageArray, setVintageWines] = React.useState([]);
 
   const fetchWines = async () => {
+      console.log('fetchWines')
     const res = await fetch(
       "https://gist.githubusercontent.com/mconnor/9b9f93ad895c695cfdc70ba6857fe6a1/raw/d0871f04fb834cc48e38386ce670ee9c584831af/wine.json"
     );
@@ -46,7 +47,7 @@ function App() {
     setVintageWines(arr);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     fetchWines();
   }, []);
 
@@ -54,11 +55,16 @@ function App() {
     <div className={styles.app}>
       <Header name="Fat Lady Wine Store" />
       <Background />
-      <Selector
-        wines={wineBySelectedVintageArray}
-        filterByVintage={onFilterByVintage}
-      />
-      <ListContainer wines={allWines} onLearnMore={showModal} />
+      { allWines.length < 1 ? <h1>Loading</h1> : 
+        <>
+            <Selector
+                wines={wineBySelectedVintageArray}
+                filterByVintage={onFilterByVintage}
+            />
+            <ListContainer wines={allWines} onLearnMore={showModal} />
+        </>
+        }
+      
     </div>
   );
 }
