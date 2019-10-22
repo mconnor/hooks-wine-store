@@ -5,16 +5,18 @@ import Dropdown from "react-bootstrap/Dropdown";
 import SplitButton from "react-bootstrap/SplitButton";
 
 type WineProps = {
-  id: string,
-  name: string,
-  vintage: number,
-  vineyard: string,
-  type: string,
-  region: string,
-  unitsSold: number,
-  ratings: Array<{
-    stars: number
-  }>
+    id: string,
+    name: string,
+    vintage: number,
+    vineyard: string,
+    type: string,
+    region: string,
+    unitsSold: number,
+    highSeller: boolean, 
+    onLearnMore: Function,
+    ratings: Array<{
+        stars: number
+      }>,
 };
 
 type Props = {

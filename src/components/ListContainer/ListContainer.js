@@ -3,6 +3,7 @@
 import * as React from "react";
 import Wine from "../Wine/Wine";
 
+
 type WineProp = {
   id: string,
   name: string,
@@ -13,33 +14,20 @@ type WineProp = {
   unitsSold: number,
   ratings: Array<{
     stars: number
-  }>
+  }>,
+  highSeller: boolean
 };
 type WinesArrayProps = {
   wines: Array<WineProp>,
-  onLearnMore: Function
+  onLearnMore: Function,
+  showingAllWines: boolean
 };
 
 function ListContainer(props: WinesArrayProps) {
-    console.log('LISTCONTAINER')
 
   const [mostSold, setMostSold] = React.useState();
-
   const { wines, onLearnMore, showingAllWines } = { ...props };
- 
-  const getAverage = (arr: Array<{'stars': number}>) => {
-    const len = arr.length;
-    if (len === 0) {
-      return -1;
-    }
-    let initialValue = 0;
-    const total = arr
-      .map(wine => wine.stars)
-      .reduce((totalStars, curr) => totalStars + curr, initialValue);
-    const avg =total / len;
-      //console.log('avg', avg)
-    return avg;
-  };
+
 
   const findMostUnitsSold = (arr: Array<WineProp>) => {
     console.log('findMostUnitsSold of ', arr)
@@ -71,7 +59,7 @@ function ListContainer(props: WinesArrayProps) {
           type={wine.type}
           region={wine.region}
           unitsSold={wine.unitsSold}
-          averageRating={getAverage(wine.ratings)}
+          ratings = {wine.ratings}
           highSeller={wine.unitsSold === mostSold}
             onLearnMore={onLearnMore}
             showingAllWines = {showingAllWines}

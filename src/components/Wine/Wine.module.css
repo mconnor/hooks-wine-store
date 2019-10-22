@@ -44,6 +44,11 @@
 .subheadline {
     composes: grayColor;
     font-size: .8em;
+    margin-bottom: 0;
+}
+
+.margin4top {
+    margin-top: 4px;
 }
 
 .col1 {
