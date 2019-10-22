@@ -10,7 +10,7 @@ import styles from "./App.module.css";
 
 function App() {
   const [allWines, setAllWines] = React.useState([]);
-  const [wineBySelectedVintageArray, setVintageWines] = React.useState([]);
+  const [wineBySelectedVintage, setWineBySelectedVintage] = React.useState([]);
 
   const fetchWines = async () => {
       console.log('fetchWines')
@@ -30,7 +30,7 @@ function App() {
 
 
     setAllWines(wineCleaned);
-    setVintageWines(wineCleaned);
+    setWineBySelectedVintage(wineCleaned);
   };
 
   const showModal = (id: string) => {
@@ -44,7 +44,7 @@ function App() {
     } else {
       arr = allWines.filter(wine => wine.vintage === selectedYear);
     }
-    setVintageWines(arr);
+    setWineBySelectedVintage(arr);
   };
 
   React.useEffect(() => {
@@ -55,13 +55,13 @@ function App() {
     <div className={styles.app}>
       <Header name="Fat Lady Wine Store" />
       <Background />
-      { allWines.length < 1 ? <h1>Loading</h1> : 
+      {( (allWines.length < 1) || (wineBySelectedVintage.length < 1)) ? <h1>Loading</h1> : 
         <>
             <Selector
-                wines={wineBySelectedVintageArray}
+                wines={allWines}
                 filterByVintage={onFilterByVintage}
             />
-            <ListContainer wines={allWines} onLearnMore={showModal} />
+            <ListContainer showingAllWines={wineBySelectedVintage === allWines} wines={wineBySelectedVintage} onLearnMore={showModal} />
         </>
         }
       
