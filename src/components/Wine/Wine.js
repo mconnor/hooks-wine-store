@@ -21,8 +21,20 @@ type Props = {
     onLearnMore: Function,
 }
 
+
+
 const Wine = (props: Props)  => {
-    const { id, name, vintage, vineyard, type, region, unitsSold, averageRating, highSeller, onLearnMore} = { ...props };
+    const { id, name, vintage, vineyard, type, region, unitsSold, averageRating, highSeller, onLearnMore, showingAllWines} = { ...props };
+   
+    function badgeJxs() {
+        if (highSeller && showingAllWines) {
+           return (<div className={styles.myBadge}><Badge variant="secondary">High Seller</Badge></div>)
+        } else if (highSeller) {
+            return   (<div className={styles.myBadge}><Badge variant="secondary">Vintage high seller</Badge></div>)
+        } else {
+            return null;
+        }
+   }
 
     return (
         <Card>
@@ -35,9 +47,8 @@ const Wine = (props: Props)  => {
                         
                         </div>
                         <p className={styles.subheadline}>{region}, {vineyard} - {type}</p>
-                        { highSeller ? 
-               <div className={styles.myBadge}><Badge variant="secondary" >High Seller</Badge></div>
-              : null }
+
+                        {badgeJxs()}
                         <div className={styles.rating}>
                             {(averageRating !== -1) ? 
                                 <Ratings

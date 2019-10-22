@@ -25,7 +25,7 @@ function ListContainer(props: WinesArrayProps) {
 
   const [mostSold, setMostSold] = React.useState();
 
-  const { wines, onLearnMore } = { ...props };
+  const { wines, onLearnMore, showingAllWines } = { ...props };
  
   const getAverage = (arr: Array<{'stars': number}>) => {
     const len = arr.length;
@@ -46,7 +46,8 @@ function ListContainer(props: WinesArrayProps) {
     const maxCallback = (acc, cur) => Math.max(acc, cur);
     console.log(maxCallback)
     //returns a number ... 370
-    return arr.map(wine => wine.unitsSold).reduce(maxCallback);
+   return arr.map(wine => wine.unitsSold).reduce(maxCallback);
+    
 
   };
 
@@ -73,6 +74,7 @@ function ListContainer(props: WinesArrayProps) {
           averageRating={getAverage(wine.ratings)}
           highSeller={wine.unitsSold === mostSold}
             onLearnMore={onLearnMore}
+            showingAllWines = {showingAllWines}
         />
       ))}
     </section>
