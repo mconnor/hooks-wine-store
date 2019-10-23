@@ -37,12 +37,8 @@ function Selector(props: Props) {
     const _year = parseInt(eventKey, 10);
     setChosenVintage(_year);
     console.log(_year);
+    filterByVintage(_year);
   };
-
-  React.useEffect(() => {
-    console.log("useEffect");
-    filterByVintage(chosenVintage);
-  }, [chosenVintage]);
 
   return (
     <SplitButton
