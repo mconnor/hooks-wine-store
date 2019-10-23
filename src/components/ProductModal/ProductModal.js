@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Ratings from 'react-ratings-declarative';
 
 
-  type WineProp = {
+type WineProp = {
     id: string,
     name: string,
     vintage: number,
@@ -20,10 +20,10 @@ import Ratings from 'react-ratings-declarative';
     ratings: Array<{
         stars: number
       }>,
-  };
+};
 
   type Props = {
-    wine: WineProp,
+    wine: ?WineProp,
     handleCloseModal: Function,
   }
 
