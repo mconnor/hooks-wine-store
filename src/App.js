@@ -12,7 +12,7 @@ import styles from "./App.module.css";
 function App() {
   const [allWines, setAllWines] = React.useState([]);
   const [wineBySelectedVintage, setWineBySelectedVintage] = React.useState([]);
-  const [featuredWine, setFeaturedWine] = React.useState(null);
+  const [featuredWine, setFeaturedWine] = React.useState();
   const [modalOpen, setModalOpen] = React.useState(false);
 
   const fetchWines = async () => {

@@ -5,17 +5,18 @@ import Wine from "../Wine/Wine";
 
 
 type WineProp = {
-  id: string,
-  name: string,
-  vintage: number,
-  vineyard: string,
-  type: string,
-  region: string,
-  unitsSold: number,
-  ratings: Array<{
-    stars: number
-  }>,
-  highSeller: boolean
+    id: string,
+    name: string,
+    vintage: number,
+    vineyard: string,
+    type: string,
+    region: string,
+    unitsSold: number,
+    highSeller: boolean, 
+    onLearnMore: Function,
+    ratings: Array<{
+        stars: number
+      }>,
 };
 type WinesArrayProps = {
   wines: Array<WineProp>,
