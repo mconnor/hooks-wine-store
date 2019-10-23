@@ -17,7 +17,7 @@ type WineProp = {
     unitsSold: number,
     highSeller: boolean, 
     onLearnMore: Function,
-    ratings: Array<{
+    ratings: $ReadOnlyArray<{
         stars: number
       }>,
 };
@@ -37,7 +37,10 @@ function ProductModal(props: Props) {
     // const handleClose = () => setShow(false);
     // const handleShow = () => setShow(true);
 
-    const avg = useGetAverage(ratings);
+    const [avg, setAvg] = useGetAverage(ratings);
+
+   
+    //console.log('ratings key ', Object.keys(ratings[0]))
 
     return (
         <Modal.Dialog>

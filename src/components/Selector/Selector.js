@@ -4,6 +4,10 @@ import * as React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import SplitButton from "react-bootstrap/SplitButton";
 
+type RatingProp = {
+    stars: number
+}
+
 type WineProps = {
     id: string,
     name: string,
@@ -14,13 +18,11 @@ type WineProps = {
     unitsSold: number,
     highSeller: boolean, 
     onLearnMore: Function,
-    ratings: Array<{
-        stars: number
-      }>,
+    ratings: $ReadOnlyArray<RatingProp>,
 };
 
 type Props = {
-  wines: Array<WineProps>,
+  wines: $ReadOnlyArray<WineProps>,
   filterByVintage: Function
 };
 

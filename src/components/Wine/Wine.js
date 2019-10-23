@@ -29,7 +29,8 @@ type Props = {
 
 const Wine = (props: Props)  => {
     const { id, name, vintage, vineyard, type, region, unitsSold, ratings, highSeller, onLearnMore, showingAllWines} = { ...props };
-    const avg = useGetAverage(ratings);
+   // const avg = useGetAverage(ratings);
+    const [avg, setAvg] = useGetAverage(ratings);
     function badgeJxs() {
         if (highSeller && showingAllWines) {
            return (<div className={styles.myBadge}><Badge variant="secondary">High Seller</Badge></div>)
