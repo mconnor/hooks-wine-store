@@ -4,49 +4,43 @@ import * as React from "react";
 import Wine from "../Wine/Wine";
 
 
-type WineProp = {
-    id: string,
-    name: string,
-    vintage: number,
-    vineyard: string,
-    type: string,
-    region: string,
-    unitsSold: number,
-    highSeller: boolean, 
-    onLearnMore: Function,
-    ratings: Array<{
-        stars: number
-      }>,
+type RatingProp = {
+    stars: number
+}
+
+type WineProps = {
+  id: string,
+  name: string,
+  vintage: number,
+  vineyard: string,
+  type: string,
+  region: string,
+  unitsSold: number,
+  highSeller: boolean,
+  onLearnMore: Function,
+  ratings: $ReadOnlyArray<RatingProp>
 };
-type WinesArrayProps = {
-  wines: Array<WineProp>,
+type Props = {
+  wines: $ReadOnlyArray<WineProps>,
   onLearnMore: Function,
   showingAllWines: boolean
 };
 
-function ListContainer(props: WinesArrayProps) {
-
+function ListContainer(props: Props) {
   const [mostSold, setMostSold] = React.useState();
   const { wines, onLearnMore, showingAllWines } = { ...props };
 
-
-  const findMostUnitsSold = (arr: Array<WineProp>) => {
-    console.log('findMostUnitsSold of ', arr)
+  const findMostUnitsSold = (arr: $ReadOnlyArray<WineProps>): number => {
     const maxCallback = (acc, cur) => Math.max(acc, cur);
-    console.log(maxCallback)
-    //returns a number ... 370
-   return arr.map(wine => wine.unitsSold).reduce(maxCallback);
-    
-
+    return arr.map(wine => wine.unitsSold).reduce(maxCallback);
   };
 
   //
-//   setMostSold(findMostUnitsSold(wines));
+  //   setMostSold(findMostUnitsSold(wines));
 
   React.useEffect(() => {
-    setMostSold(findMostUnitsSold(wines))
-  }, [wines])
-
+    setMostSold(findMostUnitsSold(wines));
+  }, [wines]);
 
   return (
     <section>
@@ -60,16 +54,15 @@ function ListContainer(props: WinesArrayProps) {
           type={wine.type}
           region={wine.region}
           unitsSold={wine.unitsSold}
-          ratings = {wine.ratings}
+          ratings={wine.ratings}
+
           highSeller={wine.unitsSold === mostSold}
-            onLearnMore={onLearnMore}
-            showingAllWines = {showingAllWines}
+          onLearnMore={onLearnMore}
+          showingAllWines={showingAllWines}
         />
       ))}
     </section>
   );
 }
-
-
 
 export default ListContainer;
