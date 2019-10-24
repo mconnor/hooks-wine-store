@@ -14,25 +14,30 @@ function App() {
   const [wineBySelectedVintage, setWineBySelectedVintage] = React.useState([]);
   const [featuredWine, setFeaturedWine] = React.useState();
   const [modalOpen, setModalOpen] = React.useState(false);
+  const [fetchError, setFetchError] = React.useState(false);
 
   const fetchWines = async () => {
-    console.log("fetchWines");
-    const res = await fetch(
-      "https://gist.githubusercontent.com/mconnor/9b9f93ad895c695cfdc70ba6857fe6a1/raw/d0871f04fb834cc48e38386ce670ee9c584831af/wine.json"
-    );
-    const data = await res.json();
-
-    const { wines } = { ...data };
-
-    const wineCleaned = wines
-      .map(wine => {
-        wine.vintage = parseInt(wine.vintage, 10);
-        return wine;
-      })
-      .sort((a, b) => a.vintage - b.vintage);
-
-    setAllWines(wineCleaned);
-    setWineBySelectedVintage(wineCleaned);
+    try {
+        const res = await fetch(
+            "https://gist.githubusercontent.com/mconnor/9b9f93ad895c695cfdc70ba6857fe6a1/raw/d0871f04fb834cc48e38386ce670ee9c584831af/wine.json"
+          );
+          const data = await res.json();
+      
+          const { wines } = { ...data };
+      
+          const wineCleaned = wines
+            .map(wine => {
+              wine.vintage = parseInt(wine.vintage, 10);
+              return wine;
+            })
+            .sort((a, b) => a.vintage - b.vintage);
+      
+          setAllWines(wineCleaned);
+          setWineBySelectedVintage(wineCleaned);
+    } catch (error) {
+        setFetchError(true);
+    }
+    
   };
 
   const showModal = (id: string) => {
@@ -63,23 +68,28 @@ function App() {
   return (
     <div className={styles.app}>
       <Header name="Fat Lady Wine Store" />
-      {modalOpen ? (
-        <ProductModal wine={featuredWine} handleCloseModal={handleCloseModal} />
-      ) : null}
+        {modalOpen ? (
+            <ProductModal wine={featuredWine} handleCloseModal={handleCloseModal} />
+        ) : null}
 
       <Background />
-      {allWines.length < 1 || wineBySelectedVintage.length < 1 ? (
-        <h1>Loading</h1>
-      ) : modalOpen ? null : (
-        <>
-          <Selector wines={allWines} filterByVintage={onFilterByVintage} />
-          <ListContainer
-            showingAllWines={wineBySelectedVintage === allWines}
-            wines={wineBySelectedVintage}
-            onLearnMore={showModal}
-          />
-        </>
-      )}
+      {fetchError ? (
+            <h1>Error fetching</h1>
+        ) :
+        allWines.length < 1 || wineBySelectedVintage.length < 1 ? (
+            <h1>Loading</h1>
+        ) : modalOpen ? null : (
+            <>
+                <Selector wines={allWines} filterByVintage={onFilterByVintage} />
+                <ListContainer
+                    showingAllWines={wineBySelectedVintage === allWines}
+                    wines={wineBySelectedVintage}
+                    onLearnMore={showModal}
+                />
+            </>
+        )}
+    
+      
     </div>
   );
 }
