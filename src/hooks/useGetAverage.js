@@ -2,38 +2,34 @@
 
 import * as React from "react";
 
+type keyType = string;
 type Props = {
-    stars: number
+  [key: keyType]: number
 };
 
-function useGetAverage(ratingArray: $ReadOnlyArray<Props>) {
-  const [value, setValue] = React.useState();
-  //console.log('xxx', Object.keys(ratingArray[0]))   //stars
-  
+function useGetAverage(ratingArray: $ReadOnlyArray<Props>, _name: string) {
+  const [value, setValue] = React.useState(-2);
+
   React.useEffect(() => {
-    function getAverage(arr: $ReadOnlyArray<Props>):void {
-        
+    function getAverage(arr: $ReadOnlyArray<Props>): void {
+      let _key;
+      console.log("useEffect");
+      if (arr[0]) {
+        _key = Object.keys(arr[0])[0];
+      }
+
       const len = arr.length;
       if (len === 0) return;
-      
-      //const _key: string = Object.keys(arr[0]);
-
-    //   const firstRating:Props = arr[0];
-    //   const _key: stars = Object.keys(firstRating)
-
       const total = arr
-        .map(item => item.stars)
+        .map(item => item[_key])
         .reduce((runningTotal, curr) => runningTotal + curr, 0);
-
       setValue(total / len);
     }
     getAverage(ratingArray);
-    //console.log('React.useEffect ', ratingArray[0])  
-    
   }, [ratingArray]);
 
-  //return [value, setValue];
-  return [value, setValue];
+  //return [value, setValue];  // not passing flow test
+  return [value];
 }
 
 export default useGetAverage;

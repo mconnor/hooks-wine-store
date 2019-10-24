@@ -17,28 +17,34 @@ type Props = {
     type: string,
     region: string,
     unitsSold: number,
-    highSeller: boolean, 
-    onLearnMore: Function,
-    ratings: Array<{
+    ratings: $ReadOnlyArray<{
         stars: number
       }>,
-      showingAllWines: boolean
-}
+
+    highSeller: boolean, 
+    onLearnMore: Function,
+    showingAllWines: boolean
+  }
 
 
 
 const Wine = (props: Props)  => {
+    
     const { id, name, vintage, vineyard, type, region, unitsSold, ratings, highSeller, onLearnMore, showingAllWines} = { ...props };
-   // const avg = useGetAverage(ratings);
-    const [avg, setAvg] = useGetAverage(ratings);
-    function badgeJxs() {
+
+    const [avg, setAvg] = useGetAverage(ratings, 'stars');
+    const badgeJxs = () => {
         if (highSeller && showingAllWines) {
-           return (<div className={styles.myBadge}><Badge variant="secondary">High Seller</Badge></div>)
+           return returnJsx('High Seller');
         } else if (highSeller) {
-            return   (<div className={styles.myBadge}><Badge variant="secondary">Vintage high seller</Badge></div>)
+            return  returnJsx('Vintage high seller');
         } else {
             return null;
         }
+   }
+
+   const returnJsx = (_copy) => {
+       return  (<div className={styles.myBadge}><Badge variant="secondary">{_copy}</Badge></div>)
    }
 
     return (
@@ -54,7 +60,7 @@ const Wine = (props: Props)  => {
                         <p className={styles.subheadline}>{region}, {vineyard} - {type}</p>
                         {badgeJxs()}  
                         <div className={styles.rating}>
-                            {(avg !== -1) ? 
+                            {(avg > 0) ? 
                                 <Ratings
                                     rating={avg}
                                     widgetDimensions="20px"
@@ -70,7 +76,6 @@ const Wine = (props: Props)  => {
                             : 
                             <span>(no ratings yet)</span> 
                             }
-                            <span className={styles.unitSold}>({unitsSold})</span>
                             <Button className={styles.margin4top} active size="sm" onClick={()=> onLearnMore(id)}>more info</Button>
                         </div>
                     </div>
