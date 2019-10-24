@@ -1,3 +1,27 @@
+# Wine Store
+
+Simple react store front end.  Written with hooks
+
+View on [zeit-now.][]
+
+- [x] add background
+- [x] add CSS modules
+- [x] add selector
+- [x] dynamically load data
+- [x] add MOST SOLD badge
+- [x] user selector to filter by vintage
+- [x] style selector dropdown
+- [x] add thumbnails for each item
+- [x] add popup modal for selected wine
+
+
+
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -66,3 +90,5 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+[now]: https://hooks-wine-store.mconnor.now.sh
