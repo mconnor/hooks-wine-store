@@ -5,6 +5,7 @@ import useGetAverage from "../../hooks/useGetAverage";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Ratings from "react-ratings-declarative";
+import styles from "./ProductModal.module.css";
 
 type WineProp = {
   id: string,
@@ -35,11 +36,11 @@ function ProductModal(props: Props) {
   return (
     <Modal.Dialog>
       <Modal.Header closeButton onClick={handleCloseModal}>
-        <Modal.Title>{name}</Modal.Title>
+        <Modal.Title className={styles.headline}>{name}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <p>
-          {name} - {vintage}
+          vintage:  {vintage}
         </p>
         <p>type: {type}</p>
         <p>region: {region}</p>
