@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 import useGetAverage from "../../hooks/useGetAverage";
+import { useSpring, animated } from "react-spring";
 import styles from "./Wine.module.css";
 
 type Props = {
@@ -59,6 +60,7 @@ const Wine = (props: Props) => {
     );
   };
 
+  const animationProps = useSpring({ to: { opacity: 1, color: "red" } });
 
   return (
     <Card>
@@ -95,8 +97,8 @@ const Wine = (props: Props) => {
         <div className={styles.col3}>
           {badgeJxs()}
 
-          <button className={styles.buttonFont}
-            
+          <button
+            className={styles.buttonFont}
             variant="secondary"
             size="sm"
             onClick={() => onLearnMore(id)}

@@ -2,11 +2,11 @@
 
 import * as React from "react";
 import Wine from "../Wine/Wine";
-
+import styles from "./ListContainer.module.css";
 
 type RatingProp = {
-    stars: number
-}
+  stars: number
+};
 
 type WineProps = {
   id: string,
@@ -29,14 +29,14 @@ type Props = {
 function ListContainer(props: Props) {
   const [mostSold, setMostSold] = React.useState();
   const { wines, onLearnMore, showingAllWines } = { ...props };
+  
+  
 
   const findMostUnitsSold = (arr: $ReadOnlyArray<WineProps>): number => {
     const maxCallback = (acc, cur) => Math.max(acc, cur);
     return arr.map(wine => wine.unitsSold).reduce(maxCallback);
   };
 
-  //
-  //   setMostSold(findMostUnitsSold(wines));
 
   React.useEffect(() => {
     setMostSold(findMostUnitsSold(wines));
@@ -44,8 +44,9 @@ function ListContainer(props: Props) {
 
   return (
     <section>
-      {wines.map(wine => (
+      {wines.map((wine, index) => (
         <Wine
+        fadeDelay={index*500}
           key={wine.id}
           id={wine.id}
           name={wine.name}
@@ -55,7 +56,6 @@ function ListContainer(props: Props) {
           region={wine.region}
           unitsSold={wine.unitsSold}
           ratings={wine.ratings}
-
           highSeller={wine.unitsSold === mostSold}
           onLearnMore={onLearnMore}
           showingAllWines={showingAllWines}
