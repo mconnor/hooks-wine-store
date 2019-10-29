@@ -9,35 +9,37 @@ import Selector from "./components/Selector/Selector";
 import ProductModal from "./components/ProductModal/ProductModal";
 import styles from "./App.module.css";
 
-function App() {
+type AppProps = {
+  url: string,
+  title: string
+};
+
+function App(props: AppProps) {
   const [allWines, setAllWines] = React.useState([]);
   const [wineBySelectedVintage, setWineBySelectedVintage] = React.useState([]);
   const [featuredWine, setFeaturedWine] = React.useState();
   const [modalOpen, setModalOpen] = React.useState(false);
   const [fetchError, setFetchError] = React.useState(false);
 
-  const fetchWines = async () => {
+  const fetchWines = async _url => {
     try {
-        const res = await fetch(
-            "https://gist.githubusercontent.com/mconnor/9b9f93ad895c695cfdc70ba6857fe6a1/raw/d0871f04fb834cc48e38386ce670ee9c584831af/wine.json"
-          );
-          const data = await res.json();
-      
-          const { wines } = { ...data };
-      
-          const wineCleaned = wines
-            .map(wine => {
-              wine.vintage = parseInt(wine.vintage, 10);
-              return wine;
-            })
-            .sort((a, b) => a.vintage - b.vintage);
-      
-          setAllWines(wineCleaned);
-          setWineBySelectedVintage(wineCleaned);
+      const res = await fetch(_url);
+      const data = await res.json();
+
+      const { wines } = { ...data };
+
+      const wineCleaned = wines
+        .map(wine => {
+          wine.vintage = parseInt(wine.vintage, 10);
+          return wine;
+        })
+        .sort((a, b) => a.vintage - b.vintage);
+
+      setAllWines(wineCleaned);
+      setWineBySelectedVintage(wineCleaned);
     } catch (error) {
-        setFetchError(true);
+      setFetchError(true);
     }
-    
   };
 
   const showModal = (id: string) => {
@@ -62,34 +64,35 @@ function App() {
   };
 
   React.useEffect(() => {
-    fetchWines();
-  }, []);
+    fetchWines(props.url);
+  }, [props.url]);
+
+  React.useEffect(() => {
+    document.title = props.title;
+  }, [props.title]);
 
   return (
     <div className={styles.app}>
-      <Header name="Fat Lady Wine Store" />
-        {modalOpen ? (
-            <ProductModal wine={featuredWine} handleCloseModal={handleCloseModal} />
-        ) : null}
+      <Header name={props.title} />
+      {modalOpen ? (
+        <ProductModal wine={featuredWine} handleCloseModal={handleCloseModal} />
+      ) : null}
 
       <Background />
       {fetchError ? (
-            <h1>Error fetching</h1>
-        ) :
-        allWines.length < 1 || wineBySelectedVintage.length < 1 ? (
-            <h1>Loading</h1>
-        ) : modalOpen ? null : (
-            <>
-                <Selector wines={allWines} filterByVintage={onFilterByVintage} />
-                <ListContainer
-                    showingAllWines={wineBySelectedVintage === allWines}
-                    wines={wineBySelectedVintage}
-                    onLearnMore={showModal}
-                />
-            </>
-        )}
-    
-      
+        <h1>Error fetching</h1>
+      ) : allWines.length < 1 || wineBySelectedVintage.length < 1 ? (
+        <h1>Loading</h1>
+      ) : modalOpen ? null : (
+        <>
+          <Selector wines={allWines} filterByVintage={onFilterByVintage} />
+          <ListContainer
+            showingAllWines={wineBySelectedVintage === allWines}
+            wines={wineBySelectedVintage}
+            onLearnMore={showModal}
+          />
+        </>
+      )}
     </div>
   );
 }
