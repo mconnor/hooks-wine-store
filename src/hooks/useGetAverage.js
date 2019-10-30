@@ -14,12 +14,16 @@ function useGetAverage(ratingArray: $ReadOnlyArray<Props>, _name: string) {
     function getAverage(arr: $ReadOnlyArray<Props>): void {
       let _key;
       console.log("useEffect");
+      
+
+     
+      if (arr === undefined) return; 
+      const len = arr.length;
+
       if (arr[0]) {
         _key = Object.keys(arr[0])[0];
       }
 
-      const len = arr.length;
-      if (len === 0) return;
       const total = arr
         .map(item => item[_key])
         .reduce((runningTotal, curr) => runningTotal + curr, 0);

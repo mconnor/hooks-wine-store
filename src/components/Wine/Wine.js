@@ -98,6 +98,7 @@ const Wine = (props: Props) => {
           {badgeJxs()}
 
           <button
+            data-testid="learn-more-btn"
             className={styles.buttonFont}
             variant="secondary"
             size="sm"
