@@ -68,12 +68,17 @@ const Wine = (props: Props) => {
         <div className={styles.col1}></div>
         <div className={styles.col2}>
           <div className={styles.headline}>
-            <span data-testid="name-container">{name}</span>,&nbsp;
-            <span data-testid="vintage-container">{vintage}</span>
+            <span 
+                data-testid="name-container">{name}
+            </span>
+            <span data-testid="vintage-container">
+                {vintage}
+            </span>
           </div>
 
-          <p className={styles.subHeadline}>
-            {region} | {vineyard} | {type}
+          <p className={styles.subHeadline} data-testid="subheadline-container">
+            <span data-testid="region-container">{region}</span>
+            <span> | {vineyard} | {type}</span>
           </p>
 
           <div>

@@ -73,7 +73,9 @@ function App(props: AppProps) {
 
   return (
     <div className={styles.app}>
-      <Header name={props.title} />
+      <Header 
+        data-testid="title-container"
+        name={props.title} />
       {modalOpen ? (
         <ProductModal wine={featuredWine} handleCloseModal={handleCloseModal} />
       ) : null}
@@ -87,6 +89,7 @@ function App(props: AppProps) {
         <>
           <Selector wines={allWines} filterByVintage={onFilterByVintage} />
           <ListContainer
+            data-testid="list-container"
             showingAllWines={wineBySelectedVintage === allWines}
             wines={wineBySelectedVintage}
             onLearnMore={showModal}

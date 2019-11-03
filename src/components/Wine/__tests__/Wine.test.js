@@ -5,10 +5,7 @@ import Wine from '../Wine';
 
 // global.fetch = require('jest-fetch-mock');
 
-afterEach(() => {
-  cleanup();
-  
-});
+console.error = jest.fn();
 
 const wineProps = 
 {
@@ -17,25 +14,28 @@ const wineProps =
     "vintage": "2015",
     "vineyard": "Apothic",
     "type": "Red Blend",
-    "region": "California",
+    region: "California",
     "unitsSold": 51,
     "ratings": [{
       "stars": 5
     }, {
       "stars": 3
     }]
-  };
+  }
+  ;
 
   test('<Wine /> with wine props', async () => {
     const { debug, getByTestId, container } = render(
         <Wine 
-            name={wineProps.name} 
-            vintage={wineProps.vintage}/>
+            name={`${wineProps.name}`} 
+            vintage={`${wineProps.vintage}`}
+            region={`${wineProps.region}`}/>
         );
    expect(getByTestId('name-container').textContent).toBe(wineProps.name);
    expect(getByTestId('vintage-container').textContent).toBe(wineProps.vintage);
-   
 
+   expect(getByTestId('region-container').textContent).toBe(wineProps.region);
+   
    // expect(container.firstChild).toMatchSnapshot()
     debug();
 
