@@ -68,8 +68,8 @@ const Wine = (props: Props) => {
         <div className={styles.col1}></div>
         <div className={styles.col2}>
           <div className={styles.headline}>
-            <span 
-                data-testid="name-container">{name}
+            <span data-testid="name-container">
+                {name}
             </span>
             <span data-testid="vintage-container">
                 {vintage}
@@ -77,8 +77,9 @@ const Wine = (props: Props) => {
           </div>
 
           <p className={styles.subHeadline} data-testid="subheadline-container">
-            <span data-testid="region-container">{region}</span>
-            <span> | {vineyard} | {type}</span>
+            <span data-testid="region-container">{region}</span> | 
+            <span data-testid="vineyard-container">{vineyard}</span> | 
+            <span data-testid="type-container">{type}</span>
           </p>
 
           <div>
