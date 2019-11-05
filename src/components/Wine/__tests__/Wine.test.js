@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup, getByTestId } from '@testing-library/react';
+import { render, cleanup, fireEvent } from '@testing-library/react';
 
 import Wine from '../Wine';
 
@@ -7,9 +7,9 @@ import Wine from '../Wine';
 afterEach(() => {
     cleanup();
     console.error.mockClear();
-  });
-
-  console.error = jest.fn();
+});
+  
+console.error = jest.fn();
 
 test('<Wine />', () => {
     render(<Wine />);
@@ -33,8 +33,10 @@ const wineProps = {
     }]
 };
 
+const clickLearnMore = jest.fn();
+
 test('<Wine /> with wine props', () => {
-    const { debug,getByTestId } = render(
+    const { debug, getByTestId } = render(
         <Wine 
             name = {wineProps.name}
             vintage = {wineProps.vintage}
@@ -47,6 +49,7 @@ test('<Wine /> with wine props', () => {
             type = {
                 `${wineProps.type}`
             }
+            onLearnMore = {clickLearnMore}
         />
     );
     expect(getByTestId('name-container').textContent).toBe(wineProps.name);
@@ -56,6 +59,8 @@ test('<Wine /> with wine props', () => {
     expect(getByTestId('vineyard-container').textContent).toBe(wineProps.vineyard);
     expect(getByTestId('type-container').textContent).toBe(wineProps.type);
 
-    debug();
-
+    expect(getByTestId('learn-more-btn').tagName).toBe('BUTTON');
+    fireEvent.click(getByTestId('learn-more-btn'));
+    expect(clickLearnMore).toHaveBeenCalledTimes(1)
+     expect(console.error).not.toHaveBeenCalled();
 });
