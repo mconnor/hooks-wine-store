@@ -28,9 +28,9 @@ type Props = {
 };
 
 function ProductModal(props: Props) {
+   
   const { name, region, vintage, ratings, type, unitsSold } = { ...props.wine };
   const { handleCloseModal } = { ...props };
-
   const [avg, setAvg] = useGetAverage(ratings, "stars");
 
   return (
@@ -39,12 +39,11 @@ function ProductModal(props: Props) {
         <Modal.Title className={styles.headline}>{name}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>
-          vintage:  {vintage}
-        </p>
-        <p>type: {type}</p>
-        <p>region: {region}</p>
-        <p>units sold: {unitsSold}</p>
+        <p data-testid="vintage-container">vintage: {vintage}</p>
+        <p data-testid="type-container">type: {type}</p>
+        <p data-testid="region-container">region: {region}</p>
+        <p data-testid="units-container">units sold: {unitsSold}</p>
+      
 
         {(avg > 0) ? (
           <Ratings
