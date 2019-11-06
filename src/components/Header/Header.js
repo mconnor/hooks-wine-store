@@ -12,7 +12,7 @@ type Props = {
 function Header(props: Props) {
     return (
        
-            <h1 className={styles.headline}>{props.name}</h1>
+            <h1 data-testid="title-container" className={styles.headline}>{props.name}</h1>
        
     )
 }
