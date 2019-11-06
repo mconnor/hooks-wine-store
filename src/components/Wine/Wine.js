@@ -63,7 +63,7 @@ const Wine = (props: Props) => {
   const animationProps = useSpring({ to: { opacity: 1, color: "red" } });
 
   return (
-    <Card>
+    <Card data-testid='wine-container'>
       <Card.Body className={styles.cardBody}>
         <div className={styles.col1}></div>
         <div className={styles.col2}>
