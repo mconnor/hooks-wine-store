@@ -35,7 +35,7 @@ function ProductModal(props: Props) {
 
   return (
     <Modal.Dialog>
-      <Modal.Header closeButton onClick={handleCloseModal}>
+      <Modal.Header data-testid="close-btn" closeButton onClick={handleCloseModal}>
         <Modal.Title className={styles.headline}>{name}</Modal.Title>
       </Modal.Header>
       <Modal.Body>

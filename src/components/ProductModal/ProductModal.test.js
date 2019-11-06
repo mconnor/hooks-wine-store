@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup, getByTestId} from "@testing-library/react"
+import { render, cleanup, fireEvent} from "@testing-library/react"
 import ProductModal from './ProductModal';
 
 
@@ -33,16 +33,27 @@ test('<ProductModal />', () => {
     }]
 };
 
+const close = jest.fn()
 
+test('<ProductModal wine={featuredWine} handleCloseModal={close} />', () => {
 
-test('<ProductModal wine={featuredWine} />', () => {
-    const {debug, getByTestId} = render( <ProductModal wine={featuredWine} />);
-   
+    const {debug, getByTestId, getByText} = render( 
+        <ProductModal 
+            wine={featuredWine}
+            handleCloseModal={close}
+        />);
+     
     expect(getByTestId('vintage-container').textContent).toBe(`vintage: ${featuredWine.vintage}`);
     expect(getByTestId('region-container').textContent).toBe(`region: ${featuredWine.region}`);
     expect(getByTestId('units-container').textContent).toBe(`units sold: ${featuredWine.unitsSold}`);
     expect(getByTestId('type-container').textContent).toBe(`type: ${featuredWine.type}`);
+//TODO fire a click on close button
+    //expect(getByText('&times;')).toBeTruthy();
+   
+    // fireEvent.click(getByTestId('close-btn'));
+    // expect(close).toHaveBeenCalledTimes(1);
 
-    expect(console.error).not.toHaveBeenCalled();
-    debug()
+   // expect(console.error).toHaveBeenCalled();
+   debug();
+    
   });
