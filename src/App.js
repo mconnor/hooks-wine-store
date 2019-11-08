@@ -17,30 +17,14 @@ type AppProps = {
 function App(props: AppProps) {
   const [allWines, setAllWines] = React.useState([]);
   const [wineBySelectedVintage, setWineBySelectedVintage] = React.useState([]);
-  const [featuredWine, setFeaturedWine] = React.useState();
-  const [modalOpen, setModalOpen] = React.useState(false);
+  
+  const [isLoading, setIsLoading] = React.useState(true);
   const [fetchError, setFetchError] = React.useState(false);
+  const [modalOpen, setModalOpen] = React.useState(false);
+  const [featuredWine, setFeaturedWine] = React.useState();
 
-  const fetchWines = async _url => {
-    try {
-      const res = await fetch(_url);
-      const data = await res.json();
 
-      const { wines } = { ...data };
-
-      const wineCleaned = wines
-        .map(wine => {
-          wine.vintage = parseInt(wine.vintage, 10);
-          return wine;
-        })
-        .sort((a, b) => a.vintage - b.vintage);
-
-      setAllWines(wineCleaned);
-      setWineBySelectedVintage(wineCleaned);
-    } catch (error) {
-      setFetchError(true);
-    }
-  };
+  
 
   const showModal = (id: string) => {
     const _wine = allWines.find(wine => wine.id === id);
@@ -64,6 +48,27 @@ function App(props: AppProps) {
   };
 
   React.useEffect(() => {
+    const fetchWines = async _url => {
+        try {
+          const res = await fetch(_url);
+          const data = await res.json();
+    
+          const { wines } = { ...data };
+    console.log('wines', wines)
+          const winesCleaned = wines
+            .map(wine => {
+              wine.vintage = parseInt(wine.vintage, 10);
+              return wine;
+            })
+            .sort((a, b) => a.vintage - b.vintage);
+    
+          setAllWines(winesCleaned);
+          setWineBySelectedVintage(winesCleaned);
+        } catch (error) {
+          setFetchError(true);
+        }
+        setIsLoading(false);
+      };
     fetchWines(props.url);
   }, [props.url]);
 
@@ -83,13 +88,12 @@ function App(props: AppProps) {
       <Background />
       {fetchError ? (
         <h1>Error fetching</h1>
-      ) : allWines.length < 1 || wineBySelectedVintage.length < 1 ? (
-        <h1>Loading</h1>
+      ) : isLoading ? (
+        <h1 data-testid='loading'>Loading</h1>
       ) : modalOpen ? null : (
         <>
           <Selector wines={allWines} filterByVintage={onFilterByVintage} />
           <ListContainer
-            data-testid="list-container"
             showingAllWines={wineBySelectedVintage === allWines}
             wines={wineBySelectedVintage}
             onLearnMore={showModal}
