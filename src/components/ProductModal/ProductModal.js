@@ -2,8 +2,6 @@
 
 import * as React from "react";
 import useGetAverage from "../../hooks/useGetAverage";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
 import Ratings from "react-ratings-declarative";
 import styles from "./ProductModal.module.css";
 
@@ -34,11 +32,14 @@ function ProductModal(props: Props) {
   const [avg, setAvg] = useGetAverage(ratings, "stars");
 
   return (
-    <Modal.Dialog>
-      <Modal.Header data-testid="close-btn" closeButton onClick={handleCloseModal}>
-        <Modal.Title className={styles.headline}>{name}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
+    <div className={styles.modal}>
+        <div className={styles.modalCard}>
+      <div className={styles.modalHeader} data-testid="close-btn">
+        <span className={styles.headline}>{name}</span>
+        <button data-testid="close-btn" onClick={handleCloseModal}>x</button>
+      </div>
+      
+      <div className={styles.body}>
         <p data-testid="vintage-container">vintage: {vintage}</p>
         <p data-testid="type-container">type: {type}</p>
         <p data-testid="region-container">region: {region}</p>
@@ -61,9 +62,13 @@ function ProductModal(props: Props) {
         ) : (
           <span>(no ratings yet)</span>
         )}
-      </Modal.Body>
-    </Modal.Dialog>
+      </div>
+      </div>
+    </div>
   );
 }
+
+
+
 
 export default ProductModal;

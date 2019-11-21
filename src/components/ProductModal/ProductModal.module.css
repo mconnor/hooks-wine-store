@@ -6,3 +6,32 @@
     flex-direction: row;
     justify-content: space-between;
   }
+
+
+  .modal {
+   
+    width: 100%;
+    display: flex;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .modalCard {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  .modalCard h1 {
+    color: black;
+  }
+
+  .modalHeader {
+    display: flex;
+  }
