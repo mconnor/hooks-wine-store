@@ -2,9 +2,7 @@
 
 import * as React from "react";
 import Ratings from "react-ratings-declarative";
-import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
-import Button from "react-bootstrap/Button";
 import useGetAverage from "../../hooks/useGetAverage";
 import { useSpring, animated } from "react-spring";
 import styles from "./Wine.module.css";
@@ -63,8 +61,8 @@ const Wine = (props: Props) => {
   const animationProps = useSpring({ to: { opacity: 1, color: "red" } });
 
   return (
-    <Card data-testid='wine-container'>
-      <Card.Body className={styles.cardBody}>
+    <div className={styles.card} data-testid='wine-container'>
+      <div className={styles.cardBody}>
         <div className={styles.col1}></div>
         <div className={styles.col2}>
           <div className={styles.headline}>
@@ -114,8 +112,8 @@ const Wine = (props: Props) => {
             click for more info
           </button>
         </div>
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 };
 

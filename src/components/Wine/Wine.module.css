@@ -1,29 +1,25 @@
-
 :root {
     --col-height: 106px;
 }
 
 .border {
-    /* border: 1px black solid; */
+    border: 1px red solid;
 }
+
 .grayColor {
-  color:green;
+    color: green;
 }
+
 .rowHeight {
     height: 104px;
 }
+
 .itemHeight {
-  height: 104px;
+    height: 104px;
 }
-.cardBody {
-   
-  width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  
-    background-color:  rgba(253, 252, 252, 0.5);
-  }
+
+
+
 .rating {
     display: flex;
     justify-content: space-between;
@@ -35,24 +31,24 @@
 }
 
 .cardBgColor {
-  background-color:  rgba(253, 252, 252, 0.5)
+    background-color: rgba(253, 252, 252, 0.5)
 }
 
 .headline {
-  composes: titleFont from '../../type.module.css';
-  font-size: 1em;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.myBadge {
-  
+    composes: titleFont from '../../type.module.css';
+    font-size: 1em;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.buttonFont{
+.myBadge {}
+
+.buttonFont {
     font-size: .5em;
 }
+
 .subHeadline {
     composes: titleFont from '../../type.module.css';
 
@@ -65,26 +61,27 @@
 
 
 .col1 {
-    composes: border;
-  height: var(--col-height);
-  width: var(--col-height);
-  flex-basis: auto;
-  background: url(../../images/wine-glass256.png);
-  background-repeat: no-repeat;
-  background-size: cover;
+    /* composes: border; */
+    height: var(--col-height);
+    width: var(--col-height);
+    flex-basis: auto;
+    background: url(../../images/wine-glass256.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+
 .col2 {
-    composes: border;
+    /* composes: border; */
     width: 55%;
-    display:flex;
+    display: flex;
     flex-direction: column;
 
-  justify-content: space-evenly
+    justify-content: space-evenly
 }
 
 .col3 {
-    composes: border;
-    display:flex;
+    /* composes: border; */
+    display: flex;
     flex-direction: column;
     justify-content: space-evenly
 }
@@ -92,7 +89,33 @@
 
 
 .unitSold {
-  margin-left: 1rem;
+    margin-left: 1rem;
 }
 
 
+.card {
+
+    width: 100%;
+    display: flex;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+
+.cardBody {
+    composes: border;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(30, 5, 119, 0.5);
+    padding: 20px;
+    max-width: 600px;
+    width: 100%;
+}
