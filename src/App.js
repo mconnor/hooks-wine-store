@@ -1,6 +1,7 @@
 // @flow
 
 import * as React from "react";
+import { useSpring } from 'react-spring';
 
 import Header from "./components/Header/Header";
 import Background from "./components/Background/Background";
@@ -24,7 +25,6 @@ function App(props: AppProps) {
   const [featuredWine, setFeaturedWine] = React.useState();
 
 
-  
 
   const showModal = (id: string) => {
     const _wine = allWines.find(wine => wine.id === id);
@@ -32,6 +32,10 @@ function App(props: AppProps) {
     setModalOpen(true);
     console.log("show modal");
   };
+
+  const modalAnimation = useSpring({
+    transform: modalOpen ? `translate3d(0,0,0) scale(1)` : `translate3d(0,100%,0) scale(0.6)`
+});
 
   const onFilterByVintage = (selectedYear: number): void => {
     let arr;
@@ -82,7 +86,7 @@ function App(props: AppProps) {
         data-testid="title-container"
         name={props.title} />
       {modalOpen ? (
-        <ProductModal wine={featuredWine} handleCloseModal={handleCloseModal} />
+        <ProductModal wine={featuredWine} handleCloseModal={handleCloseModal} animationStyle={modalAnimation} />
       ) : null}
 
       <Background />
@@ -91,14 +95,14 @@ function App(props: AppProps) {
       ) : isLoading ? (
         <h1 data-testid='loading'>Loading</h1>
       ) : modalOpen ? null : (
-        <>
+        <div>
           <Selector wines={allWines} filterByVintage={onFilterByVintage} />
           <ListContainer
             showingAllWines={wineBySelectedVintage === allWines}
             wines={wineBySelectedVintage}
             onLearnMore={showModal}
           />
-        </>
+        </div>
       )}
     </div>
   );

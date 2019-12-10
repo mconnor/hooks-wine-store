@@ -3,6 +3,7 @@
 import * as React from "react";
 import useGetAverage from "../../hooks/useGetAverage";
 import Ratings from "react-ratings-declarative";
+import { animated } from 'react-spring';
 import styles from "./ProductModal.module.css";
 
 type WineProp = {
@@ -28,11 +29,11 @@ type Props = {
 function ProductModal(props: Props) {
    
   const { name, region, vintage, ratings, type, unitsSold } = { ...props.wine };
-  const { handleCloseModal } = { ...props };
+  const { handleCloseModal, animationStyle } = { ...props };
   const [avg, setAvg] = useGetAverage(ratings, "stars");
 
   return (
-    <div className={styles.modal}>
+    <animated.div style={animationStyle} className={styles.modal}>
         <div className={styles.modalCard}>
       <div className={styles.modalHeader} data-testid="close-btn">
         <span className={styles.headline}>{name}</span>
@@ -64,7 +65,7 @@ function ProductModal(props: Props) {
         )}
       </div>
       </div>
-    </div>
+    </animated.div>
   );
 }
 
