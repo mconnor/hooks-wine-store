@@ -4,7 +4,7 @@ import * as React from "react";
 import Ratings from "react-ratings-declarative";
 import Badge from "react-bootstrap/Badge";
 import useGetAverage from "../../hooks/useGetAverage";
-import { useSpring, animated } from "react-spring";
+import { animated } from 'react-spring';
 import styles from "./Wine.module.css";
 
 type Props = {
@@ -36,7 +36,8 @@ const Wine = (props: Props) => {
     ratings,
     highSeller,
     onLearnMore,
-    showingAllWines
+    showingAllWines,
+    animStyle
   } = { ...props };
 
   const [avg, setAvg] = useGetAverage(ratings, "stars");
@@ -58,11 +59,10 @@ const Wine = (props: Props) => {
     );
   };
 
-  const animationProps = useSpring({ to: { opacity: 1, color: "red" } });
 
   return (
-    <div className={styles.card} data-testid='wine-container'>
-      <div className={styles.cardBody}>
+    
+      <animated.div style={animStyle} className={styles.cardBody} data-testid='wine-container'>
         <div className={styles.col1}></div>
         <div className={styles.col2}>
           <div className={styles.headline}>
@@ -95,7 +95,7 @@ const Wine = (props: Props) => {
                 <Ratings.Widget widgetRatedColor="red" />
               </Ratings>
             ) : (
-              <span>(no ratings yet)</span>
+              <span className={styles.noRating}>(no ratings yet)</span>
             )}
           </div>
         </div>
@@ -112,8 +112,7 @@ const Wine = (props: Props) => {
             click for more info
           </button>
         </div>
-      </div>
-    </div>
+      </animated.div>
   );
 };
 
