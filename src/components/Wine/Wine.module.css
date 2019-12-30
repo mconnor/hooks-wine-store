@@ -115,5 +115,6 @@
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(30, 5, 119, 0.5);
     padding: 4px;
+    margin-bottom:20px;
     /* width: 100%; */
 }

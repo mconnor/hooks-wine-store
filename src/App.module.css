@@ -1,24 +1,15 @@
 
 .app {
     margin: 0 auto 0 auto;
-    width: 80%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-  justify-content: center;
+    align-items: center;  
   }
-  .wineListContainer{
-      display: flex;
+
+
+.container {
+    max-width: 80%;
+ 
   }
-    
-  
-  
-  @media only screen 
-    and (max-device-width: 736px) { 
-      .app {
-        width: 100%;
-      }
-  
-  }
-  
+
   

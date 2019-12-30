@@ -95,7 +95,7 @@ function App(props: AppProps) {
       ) : isLoading ? (
         <h1 data-testid='loading'>Loading</h1>
       ) : modalOpen ? null : (
-        <div>
+        <div className={styles.container}>
           <Selector wines={allWines} filterByVintage={onFilterByVintage} />
           <ListContainer
             showingAllWines={wineBySelectedVintage === allWines}
