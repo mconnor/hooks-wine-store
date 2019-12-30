@@ -2,7 +2,7 @@
 
 Simple react store front end.  Written with hooks
 
-View on [zeit-now.][]
+View on [zeit-now.][now]
 
 - [x] add background
 - [x] add CSS modules
@@ -13,12 +13,8 @@ View on [zeit-now.][]
 - [x] style selector dropdown
 - [x] add thumbnails for each item
 - [x] add popup modal for selected wine
-
-
-
-
-
-
+- [x] unit testing - Jest
+- [x] end to end testing - React Testing Library
 
 
 
