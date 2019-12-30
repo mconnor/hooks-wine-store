@@ -13,10 +13,7 @@ function useGetAverage(ratingArray: $ReadOnlyArray<Props>, _name: string) {
   React.useEffect(() => {
     function getAverage(arr: $ReadOnlyArray<Props>): void {
       let _key;
-      console.log("useEffect");
-      
 
-     
       if (arr === undefined) return; 
       const len = arr.length;
 
@@ -37,3 +34,5 @@ function useGetAverage(ratingArray: $ReadOnlyArray<Props>, _name: string) {
 }
 
 export default useGetAverage;
+
+
