@@ -1,5 +1,4 @@
 // @flow
-
 import * as React from 'react';
 import { useTrail } from 'react-spring';
 import Wine from '../Wine/Wine';
@@ -17,14 +16,13 @@ type WineProps = {
 	type: string,
 	region: string,
 	unitsSold: number,
-	highSeller: boolean,
-	onLearnMore: (id: string) => void,
 	ratings: $ReadOnlyArray<RatingProp>
 };
 type Props = {
 	wines: $ReadOnlyArray<WineProps>,
-	onLearnMore: Function,
-	showingAllWines: boolean
+	onLearnMore: (id: string) => void,
+    showingAllWines: boolean,
+    highSeller: boolean,
 };
 
 function ListContainer(props: Props) {
@@ -77,21 +75,3 @@ function ListContainer(props: Props) {
 }
 
 export default ListContainer;
-
-/* 
-<animated.div key={key} style={props} />
-				<Wine
-					key={item.id}
-					id={item.id}
-					name={item.name}
-					vintage={item.vintage}
-					vineyard={item.vineyard}
-					type={item.type}
-					region={item.region}
-					unitsSold={item.unitsSold}
-					ratings={item.ratings}
-					highSeller={item.unitsSold === mostSold}
-					onLearnMore={onLearnMore}
-					showingAllWines={showingAllWines}
-				/>
-            </animated.div> */
