@@ -18,10 +18,10 @@ type Props = {
   ratings: $ReadOnlyArray<{
     stars: number
   }>,
-
   highSeller: boolean,
-  onLearnMore: Function,
-  showingAllWines: boolean
+  onLearnMore: (id: string) => void,
+  showingAllWines: boolean,
+  animStyle: Function
 };
 
 const Wine = (props: Props) => {
@@ -107,7 +107,11 @@ const Wine = (props: Props) => {
             className={styles.buttonFont}
             variant="secondary"
             size="sm"
-            onClick={() => onLearnMore(id)}
+            // ??? could this have performance issues?
+            onClick={(e) => {
+                e.preventDefault(); 
+                onLearnMore(id)
+            }}
           >
             click for more info
           </button>

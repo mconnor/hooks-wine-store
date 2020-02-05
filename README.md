@@ -4,6 +4,7 @@ Simple react store front end.  Written with hooks
 
 View on [zeit-now.][now]
 
+- [x] add React Spring animations
 - [x] add background
 - [x] add CSS modules
 - [x] add selector
