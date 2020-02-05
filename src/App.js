@@ -15,8 +15,21 @@ type AppProps = {
   title: string
 };
 
+type wineDataProps = {
+    id: string,
+    name: string,
+    vintage: number,
+    vineyard: string,
+    type: string,
+    region: string,
+    unitsSold: number,
+    ratings: $ReadOnlyArray<{
+      stars: number
+    }>
+  };
+
 function App(props: AppProps) {
-  const [allWines, setAllWines] = React.useState([]);
+  const [allWines, setAllWines] = React.useState<Array<wineDataProps>>([]);
   const [wineBySelectedVintage, setWineBySelectedVintage] = React.useState([]);
   
   const [isLoading, setIsLoading] = React.useState(true);
@@ -27,7 +40,7 @@ function App(props: AppProps) {
 
 
   const showModal = (id: string) => {
-    const _wine = allWines.find(wine => wine.id === id);
+    const _wine = allWines.find((wine: wineDataProps) => wine.id === id);
     setFeaturedWine(_wine);
     setModalOpen(true);
     console.log("show modal");
@@ -38,11 +51,11 @@ function App(props: AppProps) {
 });
 
   const onFilterByVintage = (selectedYear: number): void => {
-    let arr;
+    let arr: Array<wineDataProps>;
     if (selectedYear === 0) {
       arr = allWines;
     } else {
-      arr = allWines.filter(wine => wine.vintage === selectedYear);
+      arr = allWines.filter((wine: wineDataProps) => wine.vintage === selectedYear);
     }
     setWineBySelectedVintage(arr);
   };
@@ -52,28 +65,23 @@ function App(props: AppProps) {
   };
 
   React.useEffect(() => {
-    const fetchWines = async _url => {
-        try {
-          const res = await fetch(_url);
-          const data = await res.json();
-    
-          const { wines } = { ...data };
-    console.log('wines', wines)
-          const winesCleaned = wines
+      fetch(props.url)
+        .then(res => res.json())
+        .then(data => {
+            const { wines } = { ...data };
+            console.log(wines)
+            const winesCleaned: Array<wineDataProps> = wines
             .map(wine => {
               wine.vintage = parseInt(wine.vintage, 10);
               return wine;
             })
             .sort((a, b) => a.vintage - b.vintage);
-    
+            
           setAllWines(winesCleaned);
           setWineBySelectedVintage(winesCleaned);
-        } catch (error) {
-          setFetchError(true);
-        }
-        setIsLoading(false);
-      };
-    fetchWines(props.url);
+          setIsLoading(false);
+        }).catch(() => setFetchError(true))
+
   }, [props.url]);
 
   React.useEffect(() => {
@@ -86,7 +94,10 @@ function App(props: AppProps) {
         data-testid="title-container"
         name={props.title} />
       {modalOpen ? (
-        <ProductModal wine={featuredWine} handleCloseModal={handleCloseModal} animationStyle={modalAnimation} />
+        <ProductModal 
+            wine={featuredWine} 
+            handleCloseModal={handleCloseModal} 
+            animationStyle={modalAnimation} />
       ) : null}
 
       <Background />
