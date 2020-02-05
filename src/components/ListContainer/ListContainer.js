@@ -18,7 +18,7 @@ type WineProps = {
 	region: string,
 	unitsSold: number,
 	highSeller: boolean,
-	onLearnMore: Function,
+	onLearnMore: (id: string) => void,
 	ratings: $ReadOnlyArray<RatingProp>
 };
 type Props = {
@@ -58,7 +58,8 @@ function ListContainer(props: Props) {
 			{trail.map((animation, index) => (
 				<Wine
 					animStyle={animation}
-					id={wines[index].id}
+                    id={wines[index].id}
+                    key={wines[index].id}
 					name={wines[index].name}
 					vintage={wines[index].vintage}
 					vineyard={wines[index].vineyard}
